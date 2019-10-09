@@ -1,4 +1,4 @@
-# Docker base for Symfony with nginx, php 7.3, MySQL and Elasticsearch
+# Docker base for Symfony 4.x with nginx, php 7.3, MySQL 5.7
 
 ## Configuration
 
@@ -7,11 +7,8 @@
 * Add all files of this repository on your project directory (be careful to merge .env file if you have already one)
 
 If you are on linux system :
-* Add `vm.max_map_count = 262144` in file /etc/sysctl.conf (and reboot !)
 * `sudo chmod 777 var/ -R`
 * If not already started : `docker run -d --name docker-hostmanager --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /etc/hosts:/hosts d3tdistribution/docker-hostmanager`
-
-The configuration of `vm.max_map_count` is required in order to launch elasticsearch container.
 
 The image and the container docker-hostmanager permit to you to access to your project with a "human" host. (ex: `http://my-project.docker/`)
 
