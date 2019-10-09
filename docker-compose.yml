@@ -31,6 +31,7 @@ services:
             - DOMAIN_NAME=${VIRTUAL_LOCALHOST}
             - VIRTUAL_HOST=${VIRTUAL_HOST}
 
+    # MySQL
     db:
         image: mysql:5.7
         container_name: ${PROJECT_NAME}_db
@@ -46,36 +47,6 @@ services:
             - MYSQL_USER=${MYSQL_USER}
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
             - DOMAIN_NAME=db.${VIRTUAL_LOCALHOST}
-
-    elasticsearch:
-        image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
-        container_name: ${PROJECT_NAME}_es
-        volumes:
-            - ./var/es-data:/usr/share/elasticsearch/data
-        environment:
-            - cluster.name=${PROJECT_NAME}
-            - bootstrap.memory_lock=true
-            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-            - DOMAIN_NAME=es.${VIRTUAL_LOCALHOST}
-        ulimits:
-            memlock:
-                soft: -1
-                hard: -1
-
-    # ---------#
-    #  TOOLS   #
-    # ---------#
-
-    kibana:
-        image: docker.elastic.co/kibana/kibana:6.5.4
-        container_name: ${PROJECT_NAME}_kibana
-        depends_on:
-            - elasticsearch
-        ports:
-            - "5601:5601"
-        environment:
-            - ELASTICSEARCH_URL=http://elasticsearch:9200
-            - DOMAIN_NAME=kibana.${VIRTUAL_LOCALHOST}
 
 networks:
     default:
