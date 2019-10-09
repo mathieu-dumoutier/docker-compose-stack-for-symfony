@@ -4,7 +4,7 @@
 
 * Configure environment variable for your usage in .env
 * Create docker network for your project with command ```docker network create PROJECT_NAME``` (replace PROJECT_NAME by the value of your .env file)
-* Add all files of this repository on your project directory
+* Add all files of this repository on your project directory (be careful to merge .env file if you have already one)
 
 If you are on linux system :
 * Add `vm.max_map_count = 262144` in file /etc/sysctl.conf (and reboot !)
