@@ -25,13 +25,15 @@ services:
         image: nginx:alpine
         container_name: ${DOCKER_PROJECT_NAME}_nginx
         labels:
-            - traefik.backend=nginx
+            - traefik.backend=${DOCKER_PROJECT_NAME}_nginx
             - traefik.frontend.rule=Host:${DOCKER_FRONTEND_HOST}
             - traefik.docker.network=web
             - traefik.port=80
         networks:
-            - internal
-            - web
+            internal: ~
+            web:
+                aliases:
+                    - ${DOCKER_PROJECT_NAME}_nginx
         depends_on:
             - php
             - database
